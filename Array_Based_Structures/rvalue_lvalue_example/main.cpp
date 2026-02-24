@@ -20,7 +20,7 @@ int main() {
 
     int&& r1 = 100;
 
-    int&& r2 = r1;        // ERROR
+    //int&& r2 = r1;        // ERROR
     int&& r3 = std::move(r1);  // OK
 
     cout << "Done\n";

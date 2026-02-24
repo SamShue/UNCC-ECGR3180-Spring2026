@@ -17,6 +17,7 @@ void insertion_sort(T data[], int n) {
 
 int main() {
     int arr[] = {5, 2, 9, 1, 5, 6};
+    //string arr[] = {"banana", "apple", "cherry", "date", "fig", "grape"};
     int n = sizeof(arr) / sizeof(arr[0]);
 
     cout << "Original array: ";
