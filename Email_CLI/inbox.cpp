@@ -29,9 +29,9 @@ bool Inbox::remove(int index) {
         cout << "[Inbox] remove failed: index " << index << " is out of range.\n";
         return false;
     }
-    for (int i = index; i < count - 1; i++)
-        inbox[i] = inbox[i + 1];
-    count--;
+    
+    // Remove logic to be implemented
+
     return true;
 }
 
