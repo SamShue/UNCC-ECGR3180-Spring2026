@@ -1,5 +1,6 @@
 #include "inbox.h"
 #include <iostream>
+#include <utility>
 
 using namespace std;
 
@@ -55,9 +56,27 @@ bool Inbox::validIndex(int index) const {
 }
 
 void Inbox::sortByDate() {
-    // Sorting logic to be implemented
+    // Insertion sort — newest first (descending toInt())
+    for (int i = 1; i < count; i++) {
+        Email key = std::move(inbox[i]);
+        int j = i - 1;
+        while (j >= 0 && inbox[j].getDate().toInt() < key.getDate().toInt()) {
+            inbox[j + 1] = std::move(inbox[j]);
+            j--;
+        }
+        inbox[j + 1] = std::move(key);
+    }
 }
 
 void Inbox::sortByReadStatus() {
-    // Sorting logic to be implemented
+    // Insertion sort — unread first (false sorts before true)
+    for (int i = 1; i < count; i++) {
+        Email key = std::move(inbox[i]);
+        int j = i - 1;
+        while (j >= 0 && inbox[j].isRead() && !key.isRead()) {
+            inbox[j + 1] = std::move(inbox[j]);
+            j--;
+        }
+        inbox[j + 1] = std::move(key);
+    }
 }

@@ -63,7 +63,12 @@ void sortEmails(Inbox& inbox) {
          << "2. By Read Status (Unread first)\n"
          << "Choice: ";
     int choice; cin >> choice;
-    // Sorting logic to be implemented
+    if (choice == 1)      
+        inbox.sortByDate();
+    else if (choice == 2) 
+        inbox.sortByReadStatus();
+    else                  
+        cout << "Invalid selection.\n";
 }
 
 int main() {
@@ -74,7 +79,6 @@ int main() {
     // populate inbox with a few emails.
     for(int i = 0; i < 5; i++)
         inbox.push(server.getNewEmail());
-
 
     int choice;
     do {
