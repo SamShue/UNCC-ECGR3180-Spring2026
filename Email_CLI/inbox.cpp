@@ -4,24 +4,19 @@
 
 using namespace std;
 
-Inbox::Inbox() : count(0) {}
+Inbox::Inbox() {}
 
 bool Inbox::push(const Email& e) {
-    if (count >= CAPACITY) {
-        cout << "[Inbox] push failed: inbox is full.\n";
-        return false;
-    }
-    inbox[count] = e;
-    count++;
+    inbox.push_back(e);
     return true;
 }
 
 bool Inbox::pop() {
-    if (count == 0) {
+    if (inbox.empty()) {
         cout << "[Inbox] pop failed: inbox is empty.\n";
         return false;
     }
-    count--;
+    inbox.pop_back();
     return true;
 }
 
@@ -30,14 +25,12 @@ bool Inbox::remove(int index) {
         cout << "[Inbox] remove failed: index " << index << " is out of range.\n";
         return false;
     }
-    for (int i = index; i < count - 1; i++)
-        inbox[i] = inbox[i + 1];
-    count--;
+    inbox.erase(inbox.begin() + index);
     return true;
 }
 
 int Inbox::num_emails() const {
-    return count;
+    return static_cast<int>(inbox.size());
 }
 
 const Email& Inbox::getEmail(int index) const {
@@ -52,12 +45,13 @@ void Inbox::markRead(int index) {
 }
 
 bool Inbox::validIndex(int index) const {
-    return index >= 0 && index < count;
+    return index >= 0 && index < static_cast<int>(inbox.size());
 }
 
 void Inbox::sortByDate() {
     // Insertion sort — newest first (descending toInt())
-    for (int i = 1; i < count; i++) {
+    int n = static_cast<int>(inbox.size());
+    for (int i = 1; i < n; i++) {
         Email key = std::move(inbox[i]);
         int j = i - 1;
         while (j >= 0 && inbox[j].getDate().toInt() < key.getDate().toInt()) {
@@ -70,7 +64,8 @@ void Inbox::sortByDate() {
 
 void Inbox::sortByReadStatus() {
     // Insertion sort — unread first (false sorts before true)
-    for (int i = 1; i < count; i++) {
+    int n = static_cast<int>(inbox.size());
+    for (int i = 1; i < n; i++) {
         Email key = std::move(inbox[i]);
         int j = i - 1;
         while (j >= 0 && inbox[j].isRead() && !key.isRead()) {
