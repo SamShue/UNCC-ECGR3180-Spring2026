@@ -56,6 +56,7 @@ int main() {
 
     list<int> numbers = {8, 3, 6, 2, 7, 1, 4, 5};
 
+    // Sort the list using merge sort from smaller to larger
     numbers = mergeSort(numbers);
 
     for (int n : numbers)
