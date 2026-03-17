@@ -23,6 +23,7 @@ list<T> mergeLists(list<T>& left, list<T>& right) {
     }
 
     // Append remaining elements
+    // splice syntax: destination (list), source (list)
     result.splice(result.end(), left);
     result.splice(result.end(), right);
 
@@ -43,6 +44,7 @@ list<T> mergeSort(list<T> lst) {
     auto mid = lst.begin();
     advance(mid, lst.size() / 2);
 
+    // splice syntax: destination (list), source (list), start (iterator), end (iterator)
     left.splice(left.begin(), lst, lst.begin(), mid);
     right.splice(right.begin(), lst, mid, lst.end());
 
