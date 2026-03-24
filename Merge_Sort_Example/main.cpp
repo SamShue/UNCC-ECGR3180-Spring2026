@@ -4,47 +4,37 @@
 
 using namespace std;
 
-// Merge two sorted lists
-template<typename T>
-list<T> mergeLists(list<T>& left, list<T>& right) {
+list<int> mergeLists(list<int>& left, list<int>& right){
+    list<int> result;
 
-    list<T> result;
-
-    while (!left.empty() && !right.empty()) {
-
-        if (left.front() <= right.front()) {
+    while(!left.empty() && !right.empty()){
+        if(left.front() <= right.front()){
             result.push_back(left.front());
             left.pop_front();
-        }
-        else {
+        } else {
             result.push_back(right.front());
             right.pop_front();
         }
     }
 
-    // Append remaining elements
-    // splice syntax: destination (list), source (list)
     result.splice(result.end(), left);
     result.splice(result.end(), right);
 
     return result;
 }
 
-
-// Merge sort
-template<typename T>
-list<T> mergeSort(list<T> lst) {
-
-    if (lst.size() <= 1)
+list<int> mergeSort(list<int> lst){
+    if(lst.size() <= 1){
         return lst;
+    }
 
-    list<T> left;
-    list<T> right;
+    list<int> left;
+    list<int> right;
 
     auto mid = lst.begin();
-    advance(mid, lst.size() / 2);
+    advance(mid, lst.size()/2);
 
-    // splice syntax: destination (list), source (list), start (iterator), end (iterator)
+    // parameters: destination (list), source (list), start (iterator), end (iterator)
     left.splice(left.begin(), lst, lst.begin(), mid);
     right.splice(right.begin(), lst, mid, lst.end());
 
@@ -61,7 +51,8 @@ int main() {
     // Sort the list using merge sort from smaller to larger
     numbers = mergeSort(numbers);
 
-    for (int n : numbers)
-        cout << n << " ";
+    for (auto it = numbers.begin(); it != numbers.end(); it++){
+        cout << *it << endl;
+    }
     cout << endl;
 }
