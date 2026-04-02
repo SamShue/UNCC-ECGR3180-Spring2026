@@ -39,7 +39,9 @@ public:
                 }
                 current = current->right;
             } else {
-                return; // Duplicate values are ignored.
+                // No duplicates allowed, clean up and return
+                delete newNode; 
+                return;
             }
         }
     }
@@ -77,9 +79,12 @@ public:
         // Step 3: Node has ZERO or ONE child.
         Node* child = (current->left != nullptr) ? current->left : current->right;
 
-        if (parent == nullptr)       root          = child; // Deleting the root.
-        else if (parent->left  == current) parent->left  = child;
-        else                               parent->right = child;
+        if (parent == nullptr) // The parent is null if the node to delete is the root.
+            root = child; // Deleting the root.
+        else if (parent->left  == current) 
+            parent->left  = child;
+        else
+            parent->right = child;
 
         delete current;
     }
