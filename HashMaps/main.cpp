@@ -10,8 +10,9 @@ class MyMap{
     }
 
     void insert(string key, int value){
-        int 
-
+        int index = toIndex(key);
+        arr[index].key = key;
+        arr[index].value = value;
     }
 
     int& operator[] (string key) const{
@@ -19,6 +20,7 @@ class MyMap{
     } 
 
     void print() const{
+        cout << "MyMap contents:" << endl;
         for(int i = 0; i < size; i++){
             cout << "Key: " << arr[i].key << ", Value: " << arr[i].value << endl;
         }
@@ -35,7 +37,7 @@ class MyMap{
         for(char c : s){
             sum += c;
         }
-        return sum;
+        return sum % size;
     }
 
     unsigned int size;
@@ -47,7 +49,8 @@ int main(){
     MyMap map;
 
     map.insert("Butts", 7);
-    map.insert("Hello", 3);
+    map.insert("Hello", 5); // Collision with "Butts"
+    map.insert("Coffee", 3);
 
     map.print();
 
